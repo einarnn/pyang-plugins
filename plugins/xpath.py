@@ -17,11 +17,10 @@ class XPathPlugin(plugin.PyangPlugin):
 
     def add_opts(self, optparser):
         optlist = [
-            optparse.make_option("--cisco",
-                                 dest="cisco",
+            optparse.make_option("--foo",
+                                 dest="foo",
                                  action="store_true",
-                                 help="Validate the module(s) according "
-                                 "to Cisco rules."),
+                                 help="no arg"),
             ]
         optparser.add_options(optlist)
 

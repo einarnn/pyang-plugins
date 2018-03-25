@@ -37,10 +37,19 @@ setup(
         "Topic :: Software Development :: Code Generators",
         "License :: OSI Approved :: Apache Software License",
         "Programming Language :: Python :: 2.7",
-        "Programming Language :: Python :: 2 :: Only"
+        "Programming Language :: Python :: 2 :: Only",
     ],
-    install_requires=['pyang>=1.7.3'],
+    install_requires=[
+        'pyang>=1.7.3',
+        'redisearch>=0.7.0',
+    ],
     include_package_data=True,
     keywords=["yang", "pyang"],
-    entry_points={'pyang.plugin': 'xpath_pyang_plugin=plugins.xpath:pyang_plugin_init'}
+    entry_points={
+        'pyang.plugin': [
+            'strip_pyang_plugin=plugins.strip:pyang_plugin_init',
+            'xpath_pyang_plugin=plugins.xpath:pyang_plugin_init',
+            'redisearch_pyang_plugin=plugins.redisearch:pyang_plugin_init',
+        ]
+    }
 )
