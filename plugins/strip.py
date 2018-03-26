@@ -17,9 +17,9 @@ class StripPlugin(plugin.PyangPlugin):
 
     def add_opts(self, optparser):
         optlist = [
-            optparse.make_option("--strip-module",
+            optparse.make_option("--strip-module", type=str,
                                   dest="strip_module",
-                                  help="Module name to strip out"),
+                                  help="Colon-separated list of module names to strip out"),
             optparse.make_option("--strip-yang-canonical",
                                  dest="strip_yang_canonical",
                                  action="store_true",
@@ -33,12 +33,12 @@ class StripPlugin(plugin.PyangPlugin):
 
     def emit(self, ctx, modules, fd):
         module = modules[0]
+        ctx.opts.strip_module = ctx.opts.strip_module.split(':')
         emit_yang(ctx, module, fd)
 
 def emit_yang(ctx, module, fd):
     emit_stmt(ctx, module, fd, 0, None, '', '  ')
 
-_prefix_to_strip = "csc"
 _force_newline_arg = ('description', 'contact', 'organization')
 _non_quote_arg_type = ('identifier', 'identifier-ref', 'boolean', 'integer',
                        'non-negative-integer', 'date', 'ordered-by-arg',
@@ -85,13 +85,12 @@ _keyword_with_trailing_newline = (
 
 
 def emit_stmt(ctx, stmt, fd, level, prev_kwd_class, indent, indentstep):
-    if ctx.opts.strip_module and stmt.keyword == 'import' and stmt.arg == ctx.opts.strip_module:
+    if ctx.opts.strip_module and stmt.keyword == 'import' and stmt.arg in ctx.opts.strip_module:
         return
 
-    #if stmt.keyword.startswith('csc:'.format(_prefix_to_strip)):
     if isinstance(stmt.keyword, tuple):
         kw_module, _ = stmt.keyword
-        if kw_module == ctx.opts.strip_module:
+        if kw_module in ctx.opts.strip_module:
             return
     
     if ctx.opts.strip_yang_remove_unused_imports and stmt.keyword == 'import':
