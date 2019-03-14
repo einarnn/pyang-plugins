@@ -22,13 +22,13 @@ def read(fname):
 
 setup(
     name="pyang-plugins",
-    version="0.1.0",
+    version="0.2.0",
     description=("pyang plugins"),
     long_description=read('README.md'),
     packages=['plugins'],
     url="https://github.com/einarnn/pyang-plugins",
     author="Einar Nilsen-Nygaard",
-    author_email="einarnn@cisco.com",
+    author_email="einarnn@gmail.com",
     license="Apache",
     classifiers=[
         "Development Status :: 4 - Beta",
@@ -36,8 +36,7 @@ setup(
         "Intended Audience :: Developers",
         "Topic :: Software Development :: Code Generators",
         "License :: OSI Approved :: Apache Software License",
-        "Programming Language :: Python :: 2.7",
-        "Programming Language :: Python :: 2 :: Only",
+        "Programming Language :: Python",
     ],
     install_requires=[
         'pyang>=1.7.3',
@@ -47,6 +46,7 @@ setup(
     keywords=["yang", "pyang"],
     entry_points={
         'pyang.plugin': [
+            'filter_pyang_plugin=plugins.filter:pyang_plugin_init',
             'strip_pyang_plugin=plugins.strip:pyang_plugin_init',
             'xpath_pyang_plugin=plugins.xpath:pyang_plugin_init',
             'redisearch_pyang_plugin=plugins.redisearch:pyang_plugin_init',
