@@ -11,8 +11,7 @@ filter_template_full = '''<rpc xmlns="urn:ietf:params:xml:ns:netconf:base:1.0" m
       <{NODE} xmlns="{NS}"/>
     </filter>
   </get>
-</rpc>
-'''
+</rpc>'''
 
 filter_template_minimal = '''<{NODE} xmlns="{NS}"/>'''
 
