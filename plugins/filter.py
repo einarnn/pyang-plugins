@@ -51,8 +51,9 @@ def emit_tree(modules, fd, ctx):
 def print_children(i_children, ns, fd, ctx):
     for ch in i_children:
         if ctx.opts.filter_minimal:
-            print(filter_template_minimal.format(NODE=ch.arg, NS=ns), file=fd)
+            fd.write(filter_template_minimal.format(NODE=ch.arg, NS=ns))
         else:
-            print(filter_template_full.format(NODE=ch.arg, NS=ns), file=fd)
+            fd.write(filter_template_full.format(NODE=ch.arg, NS=ns))
+        fd.write('\n')
 
 
