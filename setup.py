@@ -22,7 +22,7 @@ def read(fname):
 
 setup(
     name="pyang-plugins",
-    version="0.2.0",
+    version="0.3.0",
     description=("pyang plugins"),
     long_description=read('README.md'),
     packages=['plugins'],
@@ -46,6 +46,7 @@ setup(
     keywords=["yang", "pyang"],
     entry_points={
         'pyang.plugin': [
+            'nsconv_pyang_plugin=plugins.nsconv:pyang_plugin_init',
             'filter_pyang_plugin=plugins.filter:pyang_plugin_init',
             'strip_pyang_plugin=plugins.strip:pyang_plugin_init',
             'xpath_pyang_plugin=plugins.xpath:pyang_plugin_init',
